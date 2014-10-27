@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "newtab-chrome",
+  "author": "Emil Johansson <emiljohansson.se@gmail.com>",
+  "description": "Chrome extension that replaces the standard newtab.",
+  "version": "1.0.0",
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "http://ajax.googleapis.com/"
+  ]
+}
