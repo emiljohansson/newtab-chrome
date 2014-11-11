@@ -17,12 +17,13 @@
     element._getSettings = function() {
         var date = new Date();
         var hours = date.getHours();
+        var minutes = date.getMinutes();
         if (this.getAttribute('utc')) {
             hours = date.getUTCHours() + (parseInt(this.getAttribute('utc'), 10));
         }
         return {
-            minutes: date.getMinutes(),
-            hours: hours,
+            minutes: minutes < 10 ? "0"+minutes : minutes,
+            hours: hours < 10 ? "0"+hours : hours,
             title: (this.getAttribute('title') || 'Local')
         };
     };
