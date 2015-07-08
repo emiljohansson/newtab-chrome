@@ -21,17 +21,31 @@
         if (this.getAttribute('utc')) {
             hours = date.getUTCHours() + (parseInt(this.getAttribute('utc'), 10));
         }
+        if (isDaylightSavingsTime(date)) {
+            hours += 1;
+        }
         return {
-            minutes: minutes < 10 ? "0"+minutes : minutes,
+            minutes: minutes < 10 ? "0" + minutes : minutes,
             hours: fixHours(hours),
             title: (this.getAttribute('title') || 'Local')
         };
     };
 
     function fixHours(hours) {
-        if (hours < 10) {return "0"+hours;}
-        if (hours >= 24) {return hours - 24;}
+        if (hours < 10) {
+            return "0" + hours;
+        }
+        if (hours >= 24) {
+            return hours - 24;
+        }
         return hours;
+    }
+
+    function isDaylightSavingsTime(date) {
+        var jan = new Date(date.getFullYear(), 0, 1);
+        var jul = new Date(date.getFullYear(), 6, 1);
+        var stdTimezoneOffset = Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+        return date.getTimezoneOffset() < stdTimezoneOffset;
     }
 
     document.registerElement('time-widget', {
